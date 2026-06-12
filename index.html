@@ -3,747 +3,865 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Rundum Berlin – Ihr zuverlässiger Rundum-Service für Vermieter und Eigentümer in Berlin. Objektbetreuung, Reinigung, Renovierung und mehr.">
-<title>Rundum Berlin – Ihr Rundum-Service für Vermieter & Eigentümer</title>
+<meta name="description" content="Rundum Berlin – Fast alles aus einer Hand. Service für Vermieter und Eigentümer in Berlin.">
+<title>Rundum Berlin – Fast alles aus einer Hand</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='65' font-family='serif' font-weight='bold' fill='%23c9a84c'>R</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #0e0e0e;
-    --white: #f5f2ec;
-    --gold: #c9a84c;
-    --gold-light: #e8d49a;
-    --gray: #6b6b6b;
-    --card-bg: #1a1a1a;
-    --error: #e05555;
-    --success: #4caf7d;
-  }
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8d49a;
+  --error: #e05555;
+  --success: #4caf7d;
+  --wa-green: #25D366;
+  --bg: #0e0e0e;
+  --bg2: #111;
+  --card-bg: #1a1a1a;
+  --text: #f5f2ec;
+  --text-muted: rgba(245,242,236,0.62);
+  --text-dim: rgba(245,242,236,0.38);
+  --border: rgba(201,168,76,0.16);
+  --border-subtle: rgba(245,242,236,0.07);
+  --nav-bg: rgba(14,14,14,0.93);
+  --input-bg: #222;
+  --input-border: rgba(245,242,236,0.1);
+  --shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+[data-theme="light"] {
+  --bg: #f8f6f0;
+  --bg2: #eeebe0;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: rgba(26,26,26,0.65);
+  --text-dim: rgba(26,26,26,0.42);
+  --border: rgba(201,168,76,0.28);
+  --border-subtle: rgba(26,26,26,0.09);
+  --nav-bg: rgba(248,246,240,0.95);
+  --input-bg: #f0ece0;
+  --input-border: rgba(26,26,26,0.14);
+  --shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;transition:background .3s,color .3s;}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:200;padding:1.05rem 3rem;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:background .3s;}
+.logo{font-family:'Playfair Display',serif;font-size:1.42rem;font-weight:700;color:var(--gold);letter-spacing:.02em;flex-shrink:0;}
+.logo span{color:var(--text);}
+.nav-center{display:flex;gap:1.8rem;align-items:center;}
+.nav-center a{color:var(--text);text-decoration:none;font-size:.82rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;opacity:.7;transition:opacity .2s,color .2s;}
+.nav-center a:hover{opacity:1;color:var(--gold);}
+.nav-right{display:flex;gap:.7rem;align-items:center;}
+.nav-cta{background:var(--gold);color:#0e0e0e!important;padding:.52rem 1.25rem;border-radius:3px;font-weight:500;opacity:1!important;font-size:.82rem!important;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--gold-light)!important;}
+.theme-toggle{background:none;border:1px solid var(--border);border-radius:20px;padding:.3rem .65rem;cursor:pointer;font-size:.78rem;color:var(--text);display:flex;align-items:center;gap:.35rem;transition:border-color .2s,color .2s;white-space:nowrap;}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold);}
+.lang-toggle{background:none;border:1px solid var(--border);border-radius:3px;padding:.3rem .65rem;cursor:pointer;font-size:.74rem;font-weight:500;color:var(--text);letter-spacing:.07em;transition:border-color .2s,color .2s;}
+.lang-toggle:hover{border-color:var(--gold);color:var(--gold);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s,background .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:199;flex-direction:column;padding:1.4rem 2rem;gap:1.1rem;}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{color:var(--text);text-decoration:none;font-size:.97rem;padding:.45rem 0;border-bottom:1px solid var(--border-subtle);transition:color .2s;}
+.mobile-nav a:hover{color:var(--gold);}
+.mobile-nav .mob-cta{background:var(--gold);color:#0e0e0e;text-align:center;padding:.8rem;border-radius:3px;font-weight:500;border:none;margin-top:.4rem;}
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
-  }
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:1.8rem;right:1.8rem;z-index:300;background:var(--wa-green);color:#fff;border-radius:50px;padding:.82rem 1.35rem;display:flex;align-items:center;gap:.55rem;text-decoration:none;font-weight:500;font-size:.88rem;box-shadow:0 4px 20px rgba(37,211,102,.38);transition:transform .2s,box-shadow .2s;}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,.5);}
+.wa-float svg{width:19px;height:19px;fill:#fff;flex-shrink:0;}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    padding: 1.4rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(14,14,14,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.15);
-  }
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.02em;
-  }
-  .logo span { color: var(--white); }
-  nav ul { list-style: none; display: flex; gap: 2.5rem; }
-  nav ul a {
-    color: var(--white); text-decoration: none;
-    font-size: 0.88rem; font-weight: 400; letter-spacing: 0.06em;
-    text-transform: uppercase; opacity: 0.75;
-    transition: opacity 0.2s, color 0.2s;
-  }
-  nav ul a:hover { opacity: 1; color: var(--gold); }
-  .nav-cta {
-    background: var(--gold); color: var(--black) !important;
-    padding: 0.6rem 1.4rem; border-radius: 2px;
-    font-weight: 500 !important; opacity: 1 !important;
-    transition: background 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--gold-light) !important; }
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 5rem;position:relative;overflow:hidden;background:var(--bg);}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(201,168,76,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(201,168,76,.04) 0%,transparent 60%);}
+.hero-grid{position:absolute;inset:0;opacity:.024;background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px);background-size:60px 60px;}
+.hero-content{position:relative;max-width:670px;}
+.hero-tag{display:inline-block;font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.38);padding:.33rem .88rem;border-radius:2px;margin-bottom:1.7rem;animation:fadeUp .8s ease both;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:900;line-height:1.08;margin-bottom:1.5rem;animation:fadeUp .8s .15s ease both;color:var(--text);}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-desc{font-size:1.06rem;line-height:1.78;color:var(--text-muted);max-width:490px;margin-bottom:2.4rem;animation:fadeUp .8s .3s ease both;}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;animation:fadeUp .8s .45s ease both;}
+.btn-primary{background:var(--gold);color:#0e0e0e;padding:.88rem 2rem;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:500;cursor:pointer;letter-spacing:.03em;transition:background .2s,transform .15s;text-decoration:none;display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--text);padding:.88rem 2rem;border:1px solid var(--border-subtle);border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:400;cursor:pointer;letter-spacing:.03em;transition:border-color .2s,transform .15s,color .2s;text-decoration:none;display:inline-block;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.hero-stat{position:absolute;right:3rem;bottom:4rem;display:flex;gap:2.5rem;animation:fadeUp .8s .6s ease both;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block;}
+.stat-label{font-size:.73rem;color:var(--text-dim);letter-spacing:.05em;}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 8rem 4rem 4rem;
-    position: relative; overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0; opacity: 0.03;
-    background-image: linear-gradient(var(--gold) 1px, transparent 1px),
-                      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .hero-content { position: relative; max-width: 700px; }
-  .hero-tag {
-    display: inline-block;
-    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--gold);
-    border: 1px solid rgba(201,168,76,0.4);
-    padding: 0.4rem 1rem; border-radius: 2px;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 900; line-height: 1.05;
-    margin-bottom: 1.8rem;
-    animation: fadeUp 0.8s 0.15s ease both;
-  }
-  .hero h1 em { color: var(--gold); font-style: normal; }
-  .hero p {
-    font-size: 1.1rem; line-height: 1.75;
-    color: rgba(245,242,236,0.7);
-    max-width: 520px; margin-bottom: 2.8rem;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-  .hero-btns {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.45s ease both;
-  }
-  .btn-primary {
-    background: var(--gold); color: var(--black);
-    padding: 0.9rem 2.2rem; border: none; border-radius: 2px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
-    cursor: pointer; letter-spacing: 0.03em;
-    transition: background 0.2s, transform 0.15s;
-    text-decoration: none; display: inline-block;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-secondary {
-    background: transparent; color: var(--white);
-    padding: 0.9rem 2.2rem; border: 1px solid rgba(245,242,236,0.25); border-radius: 2px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 400;
-    cursor: pointer; letter-spacing: 0.03em;
-    transition: border-color 0.2s, transform 0.15s;
-    text-decoration: none; display: inline-block;
-  }
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+/* SECTIONS */
+section{padding:6rem 3rem;background:var(--bg);}
+section.alt-bg{background:var(--bg2);}
+.section-tag{font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:block;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,3.7vw,2.85rem);font-weight:700;line-height:1.15;margin-bottom:1rem;color:var(--text);}
+.section-sub{color:var(--text-muted);font-size:.98rem;line-height:1.7;max-width:510px;}
+.divider{width:48px;height:2px;background:var(--gold);margin:1.1rem 0;}
 
-  .hero-stat {
-    position: absolute; right: 4rem; bottom: 4rem;
-    display: flex; gap: 3rem;
-    animation: fadeUp 0.8s 0.6s ease both;
-  }
-  .stat-item { text-align: center; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem; font-weight: 700; color: var(--gold);
-    display: block;
-  }
-  .stat-label { font-size: 0.78rem; color: rgba(245,242,236,0.5); letter-spacing: 0.05em; }
+/* SERVICES */
+.services-header{margin-bottom:3.2rem;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;}
+.service-card{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .25s,transform .2s,box-shadow .2s;cursor:default;}
+.service-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:var(--shadow);}
+.service-img-wrap{width:100%;height:195px;overflow:hidden;}
+.service-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;display:block;}
+.service-card:hover .service-img-wrap img{transform:scale(1.05);}
 
-  /* SECTIONS */
-  section { padding: 6rem 4rem; }
-  .section-tag {
-    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 1rem; display: block;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
-    line-height: 1.15; margin-bottom: 1.2rem;
-  }
-  .section-sub {
-    color: rgba(245,242,236,0.6); font-size: 1rem; line-height: 1.7;
-    max-width: 520px;
-  }
-  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
 
-  /* SERVICES */
-  #leistungen { background: #111; }
-  .services-header { margin-bottom: 4rem; }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5px;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.1);
-  }
-  .service-card {
-    background: #111; padding: 2.5rem 2rem;
-    transition: background 0.25s; cursor: default;
-  }
-  .service-card:hover { background: #161616; }
-  .service-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
-  .service-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem; font-weight: 700;
-    margin-bottom: 0.7rem; color: var(--white);
-  }
-  .service-card p { font-size: 0.88rem; color: rgba(245,242,236,0.55); line-height: 1.65; }
 
-  /* WHY */
-  #warum {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 6rem; align-items: center;
-  }
-  .why-visual { position: relative; height: 420px; }
-  .why-box {
-    position: absolute; background: var(--card-bg);
-    border: 1px solid rgba(201,168,76,0.12);
-    border-radius: 4px; padding: 2rem;
-  }
-  .why-box.main {
-    width: 75%; height: 75%; top: 0; left: 0;
-    background: linear-gradient(135deg, #1a1a1a, #141414);
-    display: flex; flex-direction: column; justify-content: flex-end;
-  }
-  .why-box.main .big-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem; font-weight: 900; color: var(--gold); line-height: 1;
-  }
-  .why-box.main p { font-size: 0.85rem; color: rgba(245,242,236,0.5); margin-top: 0.5rem; }
-  .why-box.accent {
-    width: 55%; right: 0; bottom: 0;
-    background: var(--gold);
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .why-box.accent h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; color: var(--black); font-weight: 700;
-  }
-  .why-box.accent p { font-size: 0.8rem; color: rgba(14,14,14,0.7); margin-top: 0.3rem; }
+.service-body{padding:1.3rem 1.5rem 1.7rem;}
+.service-icon{font-size:1.55rem;margin-bottom:.7rem;display:block;}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:700;margin-bottom:.45rem;color:var(--text);}
+.service-card p{font-size:.86rem;color:var(--text-muted);line-height:1.65;margin-bottom:.75rem;}
+.service-price{display:inline-block;background:rgba(201,168,76,.12);color:var(--gold);font-size:.78rem;font-weight:500;padding:.26rem .68rem;border-radius:20px;}
 
-  .why-points { list-style: none; margin-top: 2rem; }
-  .why-points li {
-    display: flex; gap: 1rem; align-items: flex-start;
-    padding: 1rem 0; border-bottom: 1px solid rgba(245,242,236,0.07);
-  }
-  .why-points li:last-child { border-bottom: none; }
-  .check {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: rgba(201,168,76,0.15);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 0.7rem; flex-shrink: 0; margin-top: 1px;
-  }
-  .why-points li div h4 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
-  .why-points li div p { font-size: 0.82rem; color: rgba(245,242,236,0.5); line-height: 1.5; }
+/* PRICING BANNER */
+.pricing-banner{background:var(--gold);padding:2.4rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:1.8rem;flex-wrap:wrap;}
+.pricing-banner h3{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;color:#0e0e0e;}
+.pricing-banner > div > p{font-size:.9rem;color:rgba(14,14,14,.68);margin-top:.3rem;}
+.pricing-items{display:flex;gap:2.2rem;flex-wrap:wrap;}
+.price-item{text-align:center;}
+.price-num{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:#0e0e0e;display:block;}
+.price-label{font-size:.76rem;color:rgba(14,14,14,.62);font-weight:500;}
+.btn-dark{background:#0e0e0e;color:#fff;padding:.82rem 1.75rem;border-radius:3px;text-decoration:none;font-weight:500;font-size:.88rem;white-space:nowrap;transition:background .2s;}
+.btn-dark:hover{background:#2a2a2a;}
 
-  /* BOOKING */
-  #termin {
-    background: #111;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .booking-wrap {
-    width: 100%; max-width: 720px;
-    background: var(--card-bg);
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 4px; overflow: hidden;
-  }
-  .booking-top { background: var(--gold); padding: 2.5rem 3rem; }
-  .booking-top h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem; font-weight: 700; color: var(--black);
-  }
-  .booking-top p { color: rgba(14,14,14,0.7); margin-top: 0.4rem; font-size: 0.92rem; }
-  .booking-body { padding: 2.5rem 3rem; }
+/* WHY */
+.why-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.why-visual{position:relative;height:410px;}
+.why-box{position:absolute;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:2rem;}
+.why-box.main{width:75%;height:75%;top:0;left:0;display:flex;flex-direction:column;justify-content:flex-end;}
+.why-box.main .big-text{font-family:'Playfair Display',serif;font-size:3.7rem;font-weight:900;color:var(--gold);line-height:1;}
+.why-box.main p{font-size:.84rem;color:var(--text-muted);margin-top:.5rem;}
+.why-box.accent{width:55%;right:0;bottom:0;background:var(--gold);display:flex;flex-direction:column;justify-content:center;}
+.why-box.accent h4{font-family:'Playfair Display',serif;font-size:1.08rem;color:#0e0e0e;font-weight:700;}
+.why-box.accent p{font-size:.78rem;color:rgba(14,14,14,.7);margin-top:.28rem;}
+.why-points{list-style:none;margin-top:1.7rem;}
+.why-points li{display:flex;gap:1rem;align-items:flex-start;padding:.88rem 0;border-bottom:1px solid var(--border-subtle);}
+.why-points li:last-child{border-bottom:none;}
+.check{width:22px;height:22px;border-radius:50%;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.68rem;flex-shrink:0;margin-top:2px;}
+.why-points li div h4{font-size:.92rem;font-weight:500;margin-bottom:.18rem;color:var(--text);}
+.why-points li div p{font-size:.8rem;color:var(--text-muted);line-height:1.5;}
 
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-group label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,242,236,0.5); }
+/* REVIEWS */
+.reviews-header{margin-bottom:2.8rem;}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem;margin-bottom:2.8rem;}
+.review-card{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:1.5rem 1.7rem;transition:border-color .2s;}
+.review-card:hover{border-color:var(--gold);}
+.review-stars{color:var(--gold);font-size:.88rem;letter-spacing:.08em;margin-bottom:.75rem;}
+.review-text{font-size:.88rem;line-height:1.7;color:var(--text-muted);margin-bottom:1.1rem;font-style:italic;}
+.review-author{display:flex;align-items:center;gap:.75rem;}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.18);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:.97rem;flex-shrink:0;}
+.review-name{font-size:.86rem;font-weight:500;color:var(--text);}
+.review-service{font-size:.73rem;color:var(--text-dim);margin-top:.08rem;}
 
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    background: #222; border: 1px solid rgba(245,242,236,0.1);
-    border-radius: 2px; padding: 0.85rem 1rem;
-    color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
-    transition: border-color 0.2s; outline: none;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus { border-color: var(--gold); }
+/* Review form */
+.review-form-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:1.9rem 2.1rem;max-width:660px;}
+.review-form-wrap h3{font-family:'Playfair Display',serif;font-size:1.27rem;color:var(--text);margin-bottom:1.3rem;}
+.star-picker{display:flex;gap:.38rem;margin-bottom:.95rem;}
+.star-picker span{font-size:1.45rem;cursor:pointer;opacity:.28;transition:opacity .15s;}
+.star-picker span.active{opacity:1;}
+.review-inputs{display:grid;grid-template-columns:1fr 1fr;gap:.95rem;margin-bottom:.95rem;}
+.review-inputs input,.review-textarea{background:var(--input-bg);border:1px solid var(--input-border);border-radius:3px;padding:.72rem .88rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;width:100%;}
+.review-textarea{resize:vertical;min-height:88px;width:100%;margin-bottom:.95rem;display:block;}
+.review-inputs input:focus,.review-textarea:focus{border-color:var(--gold);}
+.btn-review-submit{background:var(--gold);color:#0e0e0e;padding:.77rem 1.9rem;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:background .2s;}
+.btn-review-submit:hover{background:var(--gold-light);}
+.review-success{color:var(--success);font-size:.86rem;margin-top:.75rem;display:none;}
 
-  /* UX: error states */
-  .form-group input.error,
-  .form-group select.error { border-color: var(--error) !important; }
-  .field-error {
-    font-size: 0.75rem; color: var(--error);
-    display: none; margin-top: -0.2rem;
-  }
-  .field-error.show { display: block; }
+/* CONTACT STRIP */
+.contact-strip{background:var(--bg2);padding:2.8rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.8rem;}
+.contact-strip h3{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--text);}
+.contact-strip p{font-size:.88rem;color:var(--text-muted);margin-top:.28rem;}
+.contact-btns{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center;}
+.btn-call{background:transparent;color:var(--text);border:1px solid var(--border);padding:.65rem 1.3rem;border-radius:3px;text-decoration:none;font-size:.86rem;font-weight:500;display:flex;align-items:center;gap:.45rem;transition:border-color .2s,color .2s;}
+.btn-call:hover{border-color:var(--gold);color:var(--gold);}
+.btn-wa{background:var(--wa-green);color:#fff;border:none;padding:.65rem 1.3rem;border-radius:3px;text-decoration:none;font-size:.86rem;font-weight:500;display:flex;align-items:center;gap:.45rem;transition:background .2s;}
+.btn-wa:hover{background:#1ebe5b;}
+.btn-wa svg{width:15px;height:15px;fill:#fff;}
 
-  .form-group select option { background: #222; }
-  .form-group textarea { resize: vertical; min-height: 100px; }
+/* BOOKING */
+.booking-wrap{width:100%;max-width:710px;margin:0 auto;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.booking-top{background:var(--gold);padding:2.1rem 2.7rem;}
+.booking-top h2{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:#0e0e0e;}
+.booking-top p{color:rgba(14,14,14,.68);margin-top:.38rem;font-size:.88rem;}
+.booking-body{padding:2.1rem 2.7rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.42rem;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);}
+.form-group input,.form-group select,.form-group textarea{background:var(--input-bg);border:1px solid var(--input-border);border-radius:3px;padding:.8rem .92rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;transition:border-color .2s;outline:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group input.error,.form-group select.error{border-color:var(--error)!important;}
+.field-error{font-size:.73rem;color:var(--error);display:none;margin-top:-.1rem;}
+.field-error.show{display:block;}
+.form-group select option{background:var(--input-bg);color:var(--text);}
+.form-group textarea{resize:vertical;min-height:92px;}
+.form-submit{width:100%;padding:.97rem;background:var(--gold);color:#0e0e0e;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.96rem;font-weight:500;cursor:pointer;letter-spacing:.03em;transition:background .2s,transform .15s,opacity .2s;margin-top:.45rem;display:flex;align-items:center;justify-content:center;gap:.55rem;}
+.form-submit:hover:not(:disabled){background:var(--gold-light);transform:translateY(-1px);}
+.form-submit:disabled{opacity:.6;cursor:not-allowed;}
+.form-note{font-size:.74rem;color:var(--text-dim);text-align:center;margin-top:.85rem;}
+.spinner{width:15px;height:15px;border:2px solid rgba(14,14,14,.28);border-top-color:#0e0e0e;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.form-submit.loading .spinner{display:block;}
+.form-submit.loading .btn-text{opacity:.7;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.success-msg{display:none;text-align:center;padding:3rem 2rem;}
+.success-icon{width:58px;height:58px;border-radius:50%;background:rgba(76,175,125,.14);border:2px solid var(--success);display:flex;align-items:center;justify-content:center;font-size:1.65rem;margin:0 auto 1.3rem;}
+.success-msg h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);margin-bottom:.5rem;}
+.success-msg p{color:var(--text-muted);font-size:.92rem;line-height:1.6;}
 
-  .form-submit {
-    width: 100%; padding: 1rem;
-    background: var(--gold); color: var(--black);
-    border: none; border-radius: 2px;
-    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
-    cursor: pointer; letter-spacing: 0.04em;
-    transition: background 0.2s, transform 0.15s, opacity 0.2s;
-    margin-top: 0.5rem;
-    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-  }
-  .form-submit:hover:not(:disabled) { background: var(--gold-light); transform: translateY(-1px); }
-  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+/* FOOTER */
+footer{padding:2.8rem 3rem;border-top:1px solid var(--border-subtle);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.4rem;background:var(--bg);}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:700;color:var(--gold);}
+.footer-logo span{color:var(--text);}
+footer p{font-size:.78rem;color:var(--text-dim);}
+.footer-links{display:flex;gap:1.8rem;}
+.footer-links a{font-size:.78rem;color:var(--text-dim);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
 
-  .form-note { font-size: 0.78rem; color: rgba(245,242,236,0.35); text-align: center; margin-top: 1rem; }
+/* LEGAL */
+.legal-overlay{display:none;position:fixed;inset:0;background:rgba(14,14,14,.97);z-index:999;overflow-y:auto;padding:4rem 2rem;}
+[data-theme="light"] .legal-overlay{background:rgba(248,246,240,.98);}
+.legal-inner{max-width:680px;margin:0 auto;}
+.legal-inner h1{font-family:'Playfair Display',serif;font-size:1.95rem;color:var(--gold);margin-bottom:1.8rem;}
+.legal-inner h3{color:var(--gold-light);margin-bottom:.45rem;margin-top:1.4rem;}
+.legal-inner p{line-height:1.8;color:var(--text-muted);margin-bottom:.9rem;}
 
-  /* Spinner */
-  .spinner {
-    width: 16px; height: 16px; border: 2px solid rgba(14,14,14,0.3);
-    border-top-color: var(--black); border-radius: 50%;
-    animation: spin 0.7s linear infinite; display: none;
-  }
-  .form-submit.loading .spinner { display: block; }
-  .form-submit.loading .btn-text { opacity: 0.7; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
-  /* SUCCESS */
-  .success-msg {
-    display: none; text-align: center; padding: 3rem 2rem;
-  }
-  .success-icon {
-    width: 64px; height: 64px; border-radius: 50%;
-    background: rgba(76,175,125,0.15); border: 2px solid var(--success);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem; margin: 0 auto 1.5rem;
-  }
-  .success-msg h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; color: var(--gold); margin-bottom: 0.6rem;
-  }
-  .success-msg p { color: rgba(245,242,236,0.6); font-size: 0.95rem; line-height: 1.6; }
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-center{display:none;}
+  .hamburger{display:flex;}
+  .hero{padding:7rem 1.5rem 3rem;}
+  .hero-stat{position:static;margin-top:2.4rem;flex-wrap:wrap;justify-content:flex-start;gap:1.8rem;}
+  section{padding:4rem 1.5rem;}
+  .pricing-banner{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start;}
+  .why-wrap{grid-template-columns:1fr;gap:2.8rem;}
+  .why-visual{display:none;}
+  .form-row{grid-template-columns:1fr;}
+  .booking-top,.booking-body{padding:1.6rem;}
+  footer{flex-direction:column;text-align:center;padding:2rem 1.5rem;}
+  .contact-strip{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem;}
+  .review-inputs{grid-template-columns:1fr;}
+  .wa-float{bottom:1.1rem;right:1.1rem;padding:.72rem 1.05rem;font-size:.82rem;}
+}
 
-  /* FOOTER */
-  footer {
-    padding: 3rem 4rem;
-    border-top: 1px solid rgba(245,242,236,0.07);
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1.5rem;
-  }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
-  .footer-logo span { color: var(--white); }
-  footer p { font-size: 0.82rem; color: rgba(245,242,236,0.35); }
-  .footer-links { display: flex; gap: 2rem; }
-  .footer-links a { font-size: 0.82rem; color: rgba(245,242,236,0.4); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* MOBILE */
-  @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    nav ul { display: none; }
-    .hero { padding: 7rem 1.5rem 3rem; }
-    .hero-stat { position: static; margin-top: 3rem; justify-content: flex-start; }
-    section { padding: 4rem 1.5rem; }
-    #warum { grid-template-columns: 1fr; gap: 3rem; }
-    .why-visual { display: none; }
-    .form-row { grid-template-columns: 1fr; }
-    .booking-top, .booking-body { padding: 1.8rem; }
-    footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
-  }
+/* PRICE OPTIONS (Umzug) */
+.price-options{display:flex;gap:.7rem;margin-bottom:.75rem;flex-wrap:wrap;}
+.price-opt{flex:1;min-width:120px;border:1px solid var(--border);border-radius:4px;padding:.6rem .9rem;display:flex;flex-direction:column;gap:.18rem;}
+.price-opt.highlight{border-color:var(--gold);background:rgba(201,168,76,.07);}
+.price-opt-label{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);}
+.price-opt-val{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--gold);}
+.price-opt.highlight .price-opt-val{color:var(--gold);}
+.price-opt-unit{font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:400;color:var(--text-muted);}
+/* VIDEO HINT */
+.video-hint{display:inline-block;margin-top:.8rem;font-size:.78rem;color:var(--text-dim);background:rgba(201,168,76,.07);border:1px solid var(--border);border-radius:3px;padding:.28rem .7rem;letter-spacing:.02em;}
 </style>
 </head>
 <body>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/4917680529034?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Leistungen." target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  WhatsApp
+</a>
+
 <!-- NAV -->
 <nav>
   <div class="logo">Rundum<span> Berlin</span></div>
-  <ul>
-    <li><a href="#leistungen">Leistungen</a></li>
-    <li><a href="#warum">Über uns</a></li>
-    <li><a href="#termin" class="nav-cta">Termin anfragen</a></li>
-  </ul>
+  <div class="nav-center">
+    <a href="#leistungen" data-de="Leistungen" data-en="Services" data-ar="خدماتنا">Leistungen</a>
+    <a href="#preise" data-de="Preise" data-en="Pricing" data-ar="الأسعار">Preise</a>
+    <a href="#bewertungen" data-de="Bewertungen" data-en="Reviews" data-ar="التقييمات">Bewertungen</a>
+    <a href="#warum" data-de="Über uns" data-en="About" data-ar="من نحن">Über uns</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">🌙</span></button>
+    <button class="lang-toggle" id="langBtn" onclick="cycleLang()">DE</button>
+    <a href="#termin" class="nav-cta" id="navCta" data-de="Termin anfragen" data-en="Book Now" data-ar="احجز الآن">Termin anfragen</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+  </div>
 </nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#leistungen" onclick="closeMobileNav()" data-de="Leistungen" data-en="Services" data-ar="خدماتنا">Leistungen</a>
+  <a href="#preise" onclick="closeMobileNav()" data-de="Preise" data-en="Pricing" data-ar="الأسعار">Preise</a>
+  <a href="#bewertungen" onclick="closeMobileNav()" data-de="Bewertungen" data-en="Reviews" data-ar="التقييمات">Bewertungen</a>
+  <a href="#warum" onclick="closeMobileNav()" data-de="Über uns" data-en="About" data-ar="من نحن">Über uns</a>
+  <a href="tel:+4917680529034" onclick="closeMobileNav()">📞 +49 176 80529034</a>
+  <a href="https://wa.me/4917680529034?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Leistungen." target="_blank" class="mob-cta" data-de="WhatsApp schreiben" data-en="Message on WhatsApp" data-ar="راسلنا على واتساب">WhatsApp schreiben</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <span class="hero-tag">Berlin · Rundum-Service</span>
-    <h1>Alles aus <em>einer Hand</em> für Ihr Objekt</h1>
-    <p>Praktische Unterstützung für Vermieter und Eigentümer in Berlin — von der Wohnungsübergabe bis zur Renovierung. Zuverlässig, flexibel und persönlich.</p>
+    <span class="hero-tag" data-de="Berlin · Rundum-Service" data-en="Berlin · All-in-One Service" data-ar="برلين · خدمة شاملة">Berlin · Rundum-Service</span>
+    <h1 data-de='Fast alles aus <em>einer Hand</em> — wir erledigen es für Sie' data-en='Almost <em>everything</em> you need — one company, done for you' data-ar='تقريباً <em>كل ما تحتاجه</em> — شركة واحدة تنجز كل شيء'>Fast alles aus <em>einer Hand</em> — wir erledigen es für Sie</h1>
+    <p class="hero-desc" data-de="Von der Wohnungsübergabe bis zur Renovierung, von der Reinigung bis zum Umzug — wir kümmern uns um alles. Für Vermieter, Eigentümer und Privatpersonen in ganz Berlin. Umzüge auch europaweit." data-en="From apartment handovers to full renovations, cleaning to moving — we handle it all. Serving all of Berlin. Long-distance moves across Europe available." data-ar="من تسليم الشقق إلى التجديد الكامل، ومن التنظيف إلى الانتقال — نتولى كل شيء. نخدم برلين بالكامل. عمليات الانتقال متاحة في جميع أنحاء أوروبا.">Von der Wohnungsübergabe bis zur Renovierung, von der Reinigung bis zum Umzug — wir kümmern uns um alles. Für Vermieter, Eigentümer und Privatpersonen in ganz Berlin. Umzüge auch europaweit.</p>
     <div class="hero-btns">
-      <a href="#termin" class="btn-primary">Termin vereinbaren</a>
-      <a href="#leistungen" class="btn-secondary">Leistungen ansehen</a>
+      <a href="#termin" class="btn-primary" data-de="Termin vereinbaren" data-en="Book a Slot" data-ar="احجز موعداً">Termin vereinbaren</a>
+      <a href="https://wa.me/4917680529034?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Leistungen." class="btn-secondary" target="_blank" data-de="WhatsApp schreiben" data-en="Message on WhatsApp" data-ar="راسلنا على واتساب">WhatsApp schreiben</a>
     </div>
   </div>
   <div class="hero-stat">
-    <div class="stat-item">
-      <span class="stat-num">12+</span>
-      <span class="stat-label">Leistungen</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">Berlin</span>
-      <span class="stat-label">Stadtgebiet</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">24h</span>
-      <span class="stat-label">Antwortzeit</span>
-    </div>
+    <div class="stat-item"><span class="stat-num">10+</span><span class="stat-label" data-de="Leistungen" data-en="Services" data-ar="خدمة">Leistungen</span></div>
+    <div class="stat-item"><span class="stat-num">Berlin</span><span class="stat-label" data-de="+ Europa Umzug" data-en="+ Europe moves" data-ar="+ نقل أوروبا">+ Europa Umzug</span></div>
+    <div class="stat-item"><span class="stat-num">10–23</span><span class="stat-label" data-de="Täglich erreichbar" data-en="Daily reachable" data-ar="متاح يومياً">Täglich erreichbar</span></div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section id="leistungen">
+<section id="leistungen" class="alt-bg">
   <div class="services-header reveal">
-    <span class="section-tag">Was wir anbieten</span>
-    <h2 class="section-title">Unsere Leistungen</h2>
+    <span class="section-tag" data-de="Was wir anbieten" data-en="What we offer" data-ar="ماذا نقدم">Was wir anbieten</span>
+    <h2 class="section-title" data-de="Unsere Leistungen" data-en="Our Services" data-ar="خدماتنا">Unsere Leistungen</h2>
     <div class="divider"></div>
-    <p class="section-sub">Alles rund um Ihr Objekt — flexibel nach Ihren Vorgaben und Bedürfnissen.</p>
+    <p class="section-sub" data-de="Von A bis Z — fast alles aus einer Hand. Flexibel, persönlich, fair berechnet." data-en="From A to Z — almost everything in one place. Flexible, personal, fairly priced." data-ar="من الألف إلى الياء — كل شيء تقريباً تحت سقف واحد. مرن وشخصي وبأسعار عادلة.">Von A bis Z — fast alles aus einer Hand. Flexibel, persönlich, fair berechnet.</p>
   </div>
-  <div class="services-grid reveal">
-    <div class="service-card">
-      <span class="service-icon">🏢</span>
-      <h3>Objektbetreuung</h3>
-      <p>Individuelle Betreuung Ihres Objekts nach Absprache — zuverlässig und diskret.</p>
+  <div class="services-grid">
+
+    <!-- Umzug -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🚛</span>
+        <h3 data-de="Umzugshilfe &amp; Transport" data-en="Moving &amp; Transport" data-ar="المساعدة في الانتقال والنقل">Umzugshilfe &amp; Transport</h3>
+        <p data-de="Wir helfen schnell, sorgfältig und unkompliziert — tragen, verpacken und aufstellen. Mit eigenem LKW 3,5 Tonnen. Wir fahren auch europaweit." data-en="Fast, careful and easy — carrying, packing and setting up. Own 3.5-ton truck available. We also travel across Europe." data-ar="سريع وعناية وبدون تعقيد — حمل وتعبئة وترتيب. شاحنة 3.5 طن خاصة. ننتقل أيضاً في جميع أنحاء أوروبا.">Wir helfen schnell, sorgfältig und unkompliziert — tragen, verpacken und aufstellen. Mit eigenem LKW 3,5 Tonnen. Wir fahren auch europaweit.</p>
+        <div class="price-options">
+          <div class="price-opt">
+            <span class="price-opt-label" data-de="Ohne Fahrzeug" data-en="Without vehicle" data-ar="بدون سيارة">Ohne Fahrzeug</span>
+            <span class="price-opt-val">ab 20 €<span class="price-opt-unit" data-de=" / Std." data-en=" / hr" data-ar=" / ساعة"> / Std.</span></span>
+          </div>
+          <div class="price-opt highlight">
+            <span class="price-opt-label" data-de="Mit LKW 3,5t" data-en="With 3.5t truck" data-ar="مع شاحنة 3.5 طن">Mit LKW 3,5t</span>
+            <span class="price-opt-val">ab 60 €<span class="price-opt-unit" data-de=" / Std." data-en=" / hr" data-ar=" / ساعة"> / Std.</span></span>
+          </div>
+        </div>
+        <span class="service-price" style="margin-top:.5rem" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Dokumentation per Video auf Wunsch" data-en="📹 Video documentation on request" data-ar="📹 توثيق بالفيديو عند الطلب">📹 Dokumentation per Video auf Wunsch</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">📋</span>
-      <h3>Administrative Unterstützung</h3>
-      <p>Unterstützung bei Wohnungswechseln, Unterlagen und Verwaltungsaufgaben.</p>
+
+    <!-- Reinigung -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🧹</span>
+        <h3 data-de="Reinigung" data-en="Cleaning" data-ar="التنظيف">Reinigung</h3>
+        <p data-de="Gründliche Reinigung von Wohnungen, Objekten und ganzen Gebäuden. Ob einzelne Wohnung, ganzes Wohnhaus oder Hotelzimmer — wir stellen professionelle Reinigungskräfte, die sich um alles kümmern." data-en="Thorough cleaning of apartments, entire buildings or hotel rooms. Whether one unit or a whole block — our professional team handles everything." data-ar="تنظيف شامل للشقق والمباني الكاملة وغرف الفنادق. سواء وحدة واحدة أو مبنى بأكمله — فريقنا المحترف يتولى كل شيء.">Gründliche Reinigung von Wohnungen, Objekten und ganzen Gebäuden. Ob einzelne Wohnung, ganzes Wohnhaus oder Hotelzimmer — wir stellen professionelle Reinigungskräfte, die sich um alles kümmern.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Dokumentation per Video auf Wunsch" data-en="📹 Video documentation on request" data-ar="📹 توثيق بالفيديو عند الطلب">📹 Dokumentation per Video auf Wunsch</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">📅</span>
-      <h3>Terminkoordination</h3>
-      <p>Koordination von Besichtigungen und Terminen nach Vorgabe des Eigentümers.</p>
+
+    <!-- Renovierung -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🔨</span>
+        <h3 data-de="Renovierung &amp; Reparaturen" data-en="Renovation &amp; Repairs" data-ar="التجديد والإصلاحات">Renovierung &amp; Reparaturen</h3>
+        <p data-de="Streichen, Tapezieren, Möbelmontage, Reparaturen — wir machen Ihre Wohnung wieder schön." data-en="Painting, wallpapering, furniture assembly, repairs — we bring your home back to life." data-ar="طلاء، ورق الجدران، تجميع الأثاث، إصلاحات — نجعل منزلك جميلاً مرة أخرى.">Streichen, Tapezieren, Möbelmontage, Reparaturen — wir machen Ihre Wohnung wieder schön.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Dokumentation per Video auf Wunsch" data-en="📹 Video documentation on request" data-ar="📹 توثيق بالفيديو عند الطلب">📹 Dokumentation per Video auf Wunsch</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">🔑</span>
-      <h3>Wohnungsübergabe & -rückgabe</h3>
-      <p>Professionelle Abwicklung von Übergaben und Rückgaben nach Absprache.</p>
+
+    <!-- Übergabe -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🔑</span>
+        <h3 data-de="Wohnungsübergabe &amp; -rückgabe" data-en="Apartment Handover" data-ar="تسليم الشقق وإعادتها">Wohnungsübergabe &amp; -rückgabe</h3>
+        <p data-de="Professionelle Abwicklung von Übergaben und Rückgaben — Übergabeprotokoll inklusive. Wir dokumentieren den Zustand der Wohnung per Video und Fotos, damit alles transparent und nachvollziehbar ist. Für Vermieter, die nicht vor Ort sein können." data-en="Professional handover management — handover report included. We document the apartment condition on video and photos so everything is transparent and traceable. Perfect for landlords who cannot be on site." data-ar="إدارة احترافية للتسليم والاستلام — محضر التسليم مشمول. نوثق حالة الشقة بالفيديو والصور لضمان الشفافية والتتبع. مثالي لأصحاب العقارات غير المتواجدين.">Professionelle Abwicklung von Übergaben und Rückgaben — Übergabeprotokoll inklusive. Wir dokumentieren den Zustand der Wohnung per Video und Fotos, damit alles transparent und nachvollziehbar ist. Für Vermieter, die nicht vor Ort sein können.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Videodokumentation des Zustands inklusive" data-en="📹 Video documentation of condition included" data-ar="📹 توثيق فيديو للحالة مشمول">📹 Videodokumentation des Zustands inklusive</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">🧹</span>
-      <h3>Reinigung</h3>
-      <p>Gründliche Reinigung von Wohnungen, Objekten und ganzen Gebäuden.</p>
+
+    <!-- Objektbetreuung -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🏢</span>
+        <h3 data-de="Objektbetreuung &amp; Vermietungsservice" data-en="Property Management &amp; Rental Service" data-ar="إدارة العقارات وخدمات التأجير">Objektbetreuung &amp; Vermietungsservice</h3>
+        <p data-de="Rundum-Betreuung für Ihr Objekt — zuverlässig, diskret, persönlich. Inklusive: regelmäßige Objektbegehung mit Video-Bericht, Wohnungsfotos für Ihre Vermietungsanzeige und auf Wunsch Unterstützung bei der Mietersuche — wir helfen, zuverlässige Mieter zu finden." data-en="Full-service care for your property — reliable, discreet, personal. Includes: regular property inspections with video report sent to you, apartment photos for your rental listing, and tenant search support on request — we help find reliable tenants." data-ar="رعاية شاملة لعقارك — موثوق وسري وشخصي. يشمل: جولات تفتيشية منتظمة مع تقرير فيديو يُرسل إليك، صور الشقة لإعلان الإيجار، ودعم في البحث عن مستأجرين موثوقين عند الطلب.">Rundum-Betreuung für Ihr Objekt — zuverlässig, diskret, persönlich. Inklusive: regelmäßige Objektbegehung mit Video-Bericht, Wohnungsfotos für Ihre Vermietungsanzeige und auf Wunsch Unterstützung bei der Mietersuche — wir helfen, zuverlässige Mieter zu finden.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Regelmäßige Video-Berichte inklusive" data-en="📹 Regular video reports included" data-ar="📹 تقارير فيديو منتظمة مشمولة">📹 Regelmäßige Video-Berichte inklusive</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">🚛</span>
-      <h3>Umzugshilfe & Transport</h3>
-      <p>Umzugshilfe und Organisation von Transporten — schnell und unkompliziert.</p>
+
+    <!-- Terminkoordination -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">📅</span>
+        <h3 data-de="Terminkoordination" data-en="Appointment Coordination" data-ar="تنسيق المواعيد">Terminkoordination</h3>
+        <p data-de="Besichtigungen, Handwerker, Behörden — wir koordinieren alle Termine für Sie." data-en="Viewings, tradespeople, authorities — we coordinate all appointments for you." data-ar="المشاهدات والحرفيون والسلطات — ننسق جميع المواعيد نيابةً عنك.">Besichtigungen, Handwerker, Behörden — wir koordinieren alle Termine für Sie.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Dokumentation per Video auf Wunsch" data-en="📹 Video documentation on request" data-ar="📹 توثيق بالفيديو عند الطلب">📹 Dokumentation per Video auf Wunsch</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">🌿</span>
-      <h3>Gartenarbeit & -pflege</h3>
-      <p>Regelmäßige Gartenpflege und saisonale Gartenarbeiten für Ihr Objekt.</p>
+
+    <!-- Gartenarbeit -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🌿</span>
+        <h3 data-de="Gartenarbeit &amp; -pflege" data-en="Garden Work &amp; Maintenance" data-ar="العمل في الحديقة وصيانتها">Gartenarbeit &amp; -pflege</h3>
+        <p data-de="Rasenmähen, Schneiden, Pflegen und saisonale Arbeiten für Ihren Garten." data-en="Mowing, trimming, care and seasonal work for your garden." data-ar="قص العشب والتقليم والرعاية والأعمال الموسمية لحديقتك.">Rasenmähen, Schneiden, Pflegen und saisonale Arbeiten für Ihren Garten.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Dokumentation per Video auf Wunsch" data-en="📹 Video documentation on request" data-ar="📹 توثيق بالفيديو عند الطلب">📹 Dokumentation per Video auf Wunsch</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">🔨</span>
-      <h3>Renovierung & Reparaturen</h3>
-      <p>Malen, kleine Reparaturen, Möbelmontage und allgemeine Handwerksarbeiten.</p>
+
+
+    <!-- Möbelmontage -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🪛</span>
+        <h3 data-de="Möbelmontage &amp; Aufbauservice" data-en="Furniture Assembly &amp; Setup" data-ar="تجميع الأثاث وخدمة التركيب">Möbelmontage &amp; Aufbauservice</h3>
+        <p data-de="Wir bauen jede Art von Möbeln auf — Ikea, Küchen, Kleiderschränke, Betten, Regale und mehr. Auch Demontage bei Umzug möglich. Egal ob 1 Stück oder eine ganze Wohnung — wir kommen, bauen auf und räumen den Verpackungsmüll weg." data-en="We assemble all kinds of furniture — Ikea, kitchens, wardrobes, beds, shelves and more. Disassembly for moving also available. Whether 1 piece or a whole apartment — we come, assemble and take the packaging waste away." data-ar="نقوم بتجميع جميع أنواع الأثاث — إيكيا، مطابخ، خزائن، أسرة، رفوف والمزيد. التفكيك عند الانتقال متاح أيضاً. سواء قطعة واحدة أو شقة كاملة — نأتي ونجمّع ونأخذ نفايات التغليف.">Wir bauen jede Art von Möbeln auf — Ikea, Küchen, Kleiderschränke, Betten, Regale und mehr. Auch Demontage bei Umzug möglich. Egal ob 1 Stück oder eine ganze Wohnung — wir kommen, bauen auf und räumen den Verpackungsmüll weg.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Dokumentation per Video auf Wunsch" data-en="📹 Video documentation on request" data-ar="📹 توثيق بالفيديو عند الطلب">📹 Dokumentation per Video auf Wunsch</span>
+      </div>
     </div>
-    <div class="service-card">
-      <span class="service-icon">📬</span>
-      <h3>Kommunikation & Unterlagen</h3>
-      <p>Weiterleitung von Unterlagen und Kommunikation nach Anweisung des Eigentümers.</p>
+
+    <!-- Entrümpelung -->
+    <div class="service-card reveal">
+      <div class="service-body">
+        <span class="service-icon">🗑️</span>
+        <h3 data-de="Entrümpelung &amp; Entsorgung" data-en="Clearance &amp; Disposal" data-ar="إخلاء وتخلص من المقتنيات">Entrümpelung &amp; Entsorgung</h3>
+        <p data-de="Wir räumen Wohnungen, Keller, Dachböden, Garagen und ganze Objekte. Egal wie viel — wir entsorgen alles, was Sie nicht mehr brauchen. Schnell, zuverlässig und auf Wunsch auch kurzfristig." data-en="We clear apartments, basements, attics, garages and entire properties. No matter how much — we dispose of everything you no longer need. Fast, reliable and available on short notice." data-ar="نقوم بإخلاء الشقق والأقبية والعلّيات والمرائب والعقارات الكاملة. بغض النظر عن الكمية — نتخلص من كل ما لا تحتاجه. سريع وموثوق ومتاح بإشعار قصير.">Wir räumen Wohnungen, Keller, Dachböden, Garagen und ganze Objekte. Egal wie viel — wir entsorgen alles, was Sie nicht mehr brauchen. Schnell, zuverlässig und auf Wunsch auch kurzfristig.</p>
+        <span class="service-price" data-de="✓ Kostenloser Objektbesuch · Preis nach Absprache" data-en="✓ Free site visit · Price on request" data-ar="✓ زيارة مجانية للموقع · السعر بالاتفاق">✓ Kostenloser Objektbesuch · Preis nach Absprache</span>
+        <span class="video-hint" data-de="📹 Dokumentation per Video auf Wunsch" data-en="📹 Video documentation on request" data-ar="📹 توثيق بالفيديو عند الطلب">📹 Dokumentation per Video auf Wunsch</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING BANNER -->
+<div id="preise" class="pricing-banner">
+  <div>
+    <h3 data-de="Transparente Preise" data-en="Transparent Pricing" data-ar="أسعار شفافة">Transparente Preise</h3>
+    <p data-de="Alle Preise nach kostenlosem Objektbesuch bestätigbar. Umzug ohne Fahrzeug ab 20 € / Std., mit LKW ab 60 € / Std. Alle anderen Leistungen: ✓ Kostenloser Objektbesuch · Preis nach Absprache." data-en="All prices can be confirmed after a free site visit. Moving without vehicle from €20/hr, with truck from €60/hr. All other services: ✓ Free site visit · Price on request." data-ar="جميع الأسعار قابلة للتأكيد بعد زيارة مجانية. الانتقال بدون سيارة من 20 يورو/ساعة، مع شاحنة من 60 يورو/ساعة. جميع الخدمات الأخرى: ✓ زيارة مجانية للموقع · السعر بالاتفاق.">Alle Preise nach kostenlosem Objektbesuch bestätigbar. Umzug ohne Fahrzeug ab 20 € / Std., mit LKW ab 60 € / Std. Alle anderen Leistungen: ✓ Kostenloser Objektbesuch · Preis nach Absprache.</p>
+  </div>
+  <div class="pricing-items">
+    <div class="price-item">
+      <span class="price-num">ab 20 €</span>
+      <span class="price-label" data-de="Umzug / Std." data-en="Moving / hr" data-ar="انتقال / ساعة">Umzug / Std.</span>
+    </div>
+    <div class="price-item">
+      <span class="price-num">ab 60 €</span>
+      <span class="price-label" data-de="Mit LKW / Std." data-en="With truck / hr" data-ar="مع شاحنة / ساعة">Mit LKW / Std.</span>
+    </div>
+    <div class="price-item">
+      <span class="price-num">0 €</span>
+      <span class="price-label" data-de="Kostenloser Objektbesuch" data-en="Free site visit" data-ar="زيارة موقع مجانية">Kostenloser Objektbesuch</span>
+    </div>
+  </div>
+  <a href="#termin" class="btn-dark" data-de="Angebot anfragen" data-en="Get a Quote" data-ar="اطلب عرضاً">Angebot anfragen</a>
+</div>
+
+<!-- WHY -->
+<section id="warum" style="background:var(--bg);">
+  <div class="why-wrap">
+    <div class="why-visual reveal">
+      <div class="why-box main">
+        <span class="big-text">100%</span>
+        <p data-de="Engagement für Ihr Objekt" data-en="Commitment to your property" data-ar="التزام تام بعقارك">Engagement für Ihr Objekt</p>
+      </div>
+      <div class="why-box accent">
+        <h4 data-de="Persönlich & zuverlässig" data-en="Personal & reliable" data-ar="شخصي وموثوق">Persönlich & zuverlässig</h4>
+        <p data-de="Ein Ansprechpartner für alles" data-en="One contact for everything" data-ar="جهة اتصال واحدة لكل شيء">Ein Ansprechpartner für alles</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="section-tag" data-de="Warum Rundum Berlin" data-en="Why Rundum Berlin" data-ar="لماذا Rundum Berlin">Warum Rundum Berlin</span>
+      <h2 class="section-title" data-de="Fast alles. Eine Firma." data-en="Almost everything. One company." data-ar="كل شيء تقريباً. شركة واحدة.">Fast alles. Eine Firma.</h2>
+      <div class="divider"></div>
+      <p class="section-sub" data-de="Kein Koordinieren zwischen verschiedenen Dienstleistern — wir erledigen alles." data-en="No juggling between different providers — we do it all." data-ar="لا حاجة للتنسيق بين مزودين مختلفين — نحن نفعل كل شيء.">Kein Koordinieren zwischen verschiedenen Dienstleistern — wir erledigen alles.</p>
+      <ul class="why-points">
+        <li>
+          <div class="check">✓</div>
+          <div>
+            <h4 data-de="Ein Ansprechpartner" data-en="One point of contact" data-ar="جهة اتصال واحدة">Ein Ansprechpartner</h4>
+            <p data-de="Für alle Aufgaben rund um Ihr Objekt — einfach und unkompliziert." data-en="For all tasks around your property — simple and easy." data-ar="لجميع المهام المتعلقة بعقارك — بسيط وغير معقد.">Für alle Aufgaben rund um Ihr Objekt — einfach und unkompliziert.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div>
+            <h4 data-de="Flexibel nach Ihren Vorgaben" data-en="Flexible to your requirements" data-ar="مرن وفق متطلباتك">Flexibel nach Ihren Vorgaben</h4>
+            <p data-de="Wir arbeiten so, wie Sie es brauchen — angepasst an Ihre Anforderungen." data-en="We work the way you need — adapted to your requirements." data-ar="نعمل بالطريقة التي تحتاجها — متكيفين مع متطلباتك.">Wir arbeiten so, wie Sie es brauchen — angepasst an Ihre Anforderungen.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div>
+            <h4 data-de="24h Reaktionszeit" data-en="24h response time" data-ar="وقت استجابة 24 ساعة">24h Reaktionszeit</h4>
+            <p data-de="Wir antworten innerhalb von 24 Stunden — persönlich, nicht automatisiert." data-en="We respond within 24 hours — personally, not automated." data-ar="نرد في غضون 24 ساعة — شخصياً وليس بشكل آلي.">Wir antworten innerhalb von 24 Stunden — persönlich, nicht automatisiert.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div>
+            <h4 data-de="Faire Preise ab 20 € / Std." data-en="Fair prices from €20 / hr" data-ar="أسعار عادلة من 20 يورو/ساعة">Faire Preise ab 20 € / Std.</h4>
+            <p data-de="Transparent, ohne versteckte Kosten — ab 20 € / Std. ohne Fahrzeug, ab 60 € / Std. mit LKW." data-en="Transparent, no hidden costs — from €20/hr without vehicle, from €60/hr with truck." data-ar="شفاف، بدون تكاليف خفية — من 20 يورو/ساعة بدون سيارة، من 60 يورو/ساعة مع شاحنة.">Transparent, ohne versteckte Kosten — ab 20 € / Std. ohne Fahrzeug, ab 60 € / Std. mit LKW.</p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- WHY -->
-<section id="warum" style="padding: 6rem 4rem;">
-  <div class="why-visual reveal">
-    <div class="why-box main">
-      <span class="big-text">100%</span>
-      <p>Engagement für Ihr Objekt</p>
+<!-- REVIEWS -->
+<section id="bewertungen" class="alt-bg">
+  <div class="reviews-header reveal">
+    <span class="section-tag" data-de="Was Kunden sagen" data-en="What clients say" data-ar="ماذا يقول العملاء">Was Kunden sagen</span>
+    <h2 class="section-title" data-de="Bewertungen" data-en="Reviews" data-ar="التقييمات">Bewertungen</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="reviews-grid" id="reviewsGrid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text" data-de='"Mohammed hat unsere Wohnung nach dem Auszug komplett gereinigt — alles war makellos. Innerhalb von 24h geantwortet und sofort Termin gemacht."' data-en='"Mohammed deep-cleaned our apartment after move-out — everything was spotless. Replied within 24h and booked straight away."' data-ar='"نظّف محمد شقتنا بعد انتهاء عقد الإيجار — كان كل شيء لامعاً. رد في غضون 24 ساعة وحجز الموعد فوراً."'>"Mohammed hat unsere Wohnung nach dem Auszug komplett gereinigt — alles war makellos. Innerhalb von 24h geantwortet und sofort Termin gemacht."</p>
+      <div class="review-author"><div class="review-avatar">S</div><div><div class="review-name">Sabine K.</div><div class="review-service" data-de="Reinigung · Berlin-Mitte" data-en="Cleaning · Berlin-Mitte" data-ar="تنظيف · برلين-ميتيه">Reinigung · Berlin-Mitte</div></div></div>
     </div>
-    <div class="why-box accent">
-      <h4>Persönlich & zuverlässig</h4>
-      <p>Ein Ansprechpartner für alles</p>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text" data-de='"Umzug mit dem 3,5-Tonner war perfekt. Alles kam sicher an, nichts beschädigt. Günstiger und besser als jede Umzugsfirma, die ich je hatte."' data-en='"Move with the 3.5-tonne truck was perfect. Everything arrived safely, nothing damaged. Cheaper and better than any moving company I have used."' data-ar='"كان الانتقال بشاحنة 3.5 طن مثالياً. وصل كل شيء بأمان. أرخص وأفضل من أي شركة نقل."'>"Umzug mit dem 3,5-Tonner war perfekt. Alles kam sicher an, nichts beschädigt. Günstiger und besser als jede Umzugsfirma, die ich je hatte."</p>
+      <div class="review-author"><div class="review-avatar">T</div><div><div class="review-name">Thomas R.</div><div class="review-service" data-de="Umzug · Prenzlauer Berg" data-en="Moving · Prenzlauer Berg" data-ar="انتقال · برنتسلاور بيرغ">Umzug · Prenzlauer Berg</div></div></div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text" data-de='"Übergabe und Renovierung in einer Woche erledigt. Ich war im Ausland und musste mich um nichts kümmern. Zuverlässiger Partner für Vermieter."' data-en='"Handover and renovation done in one week. I was abroad and had nothing to worry about. Reliable partner for landlords."' data-ar='"تسليم الشقة والتجديد في أسبوع واحد. كنت في الخارج ولم أضطر للقلق بشأن أي شيء."'>"Übergabe und Renovierung in einer Woche erledigt. Ich war im Ausland und musste mich um nichts kümmern. Zuverlässiger Partner für Vermieter."</p>
+      <div class="review-author"><div class="review-avatar">A</div><div><div class="review-name">Ahmad M.</div><div class="review-service" data-de="Übergabe + Renovierung · Neukölln" data-en="Handover + Renovation · Neukölln" data-ar="تسليم + تجديد · نيوكولن">Übergabe + Renovierung · Neukölln</div></div></div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text" data-de='"Gartenpflege seit 4 Monaten — immer pünktlich, immer sauber. Sieht jedes Mal aus wie frisch aus dem Magazin."' data-en='"Garden maintenance for 4 months — always on time, always clean. Looks like a magazine shoot every time."' data-ar='"صيانة الحديقة منذ 4 أشهر — دائماً في الوقت المحدد ونظيف دائماً."'>"Gartenpflege seit 4 Monaten — immer pünktlich, immer sauber. Sieht jedes Mal aus wie frisch aus dem Magazin."</p>
+      <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Maria L.</div><div class="review-service" data-de="Gartenarbeit · Zehlendorf" data-en="Garden work · Zehlendorf" data-ar="عمل الحديقة · تسيلندورف">Gartenarbeit · Zehlendorf</div></div></div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text" data-de='"Schnelle Kommunikation. Kleine Reparaturen erledigt, Möbel montiert. Sehr faire Preise für die Qualität."' data-en='"Fast communication. Small repairs done, furniture assembled. Very fair prices for the quality."' data-ar='"تواصل سريع. إصلاحات صغيرة مكتملة وأثاث مجمَّع. أسعار عادلة جداً."'>"Schnelle Kommunikation. Kleine Reparaturen erledigt, Möbel montiert. Sehr faire Preise für die Qualität."</p>
+      <div class="review-author"><div class="review-avatar">F</div><div><div class="review-name">Felix B.</div><div class="review-service" data-de="Reparaturen · Charlottenburg" data-en="Repairs · Charlottenburg" data-ar="إصلاحات · شارلوتنبورغ">Reparaturen · Charlottenburg</div></div></div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text" data-de='"Ich verwalte 6 Wohnungen und brauche einen zuverlässigen Partner. Rundum Berlin ist genau das — flexibel, ehrlich, immer erreichbar."' data-en='"I manage 6 apartments and need a reliable partner. Rundum Berlin is exactly that — flexible, honest, always reachable."' data-ar='"أدير 6 شقق وأحتاج إلى شريك موثوق. Rundum Berlin هو بالضبط ذلك."'>"Ich verwalte 6 Wohnungen und brauche einen zuverlässigen Partner. Rundum Berlin ist genau das — flexibel, ehrlich, immer erreichbar."</p>
+      <div class="review-author"><div class="review-avatar">K</div><div><div class="review-name">Klaus W.</div><div class="review-service" data-de="Objektbetreuung · Spandau" data-en="Property mgmt · Spandau" data-ar="إدارة عقارات · شباندو">Objektbetreuung · Spandau</div></div></div>
     </div>
   </div>
-  <div class="reveal">
-    <span class="section-tag">Warum Rundum Berlin</span>
-    <h2 class="section-title">Alles aus einer Hand</h2>
-    <div class="divider"></div>
-    <p class="section-sub">Kein Koordinieren zwischen verschiedenen Dienstleistern mehr — wir kümmern uns um alles.</p>
-    <ul class="why-points">
-      <li>
-        <div class="check">✓</div>
-        <div><h4>Ein Ansprechpartner</h4><p>Für alle Aufgaben rund um Ihr Objekt — einfach und unkompliziert.</p></div>
-      </li>
-      <li>
-        <div class="check">✓</div>
-        <div><h4>Flexibel nach Ihren Vorgaben</h4><p>Wir arbeiten so, wie Sie es brauchen — angepasst an Ihre Anforderungen.</p></div>
-      </li>
-      <li>
-        <div class="check">✓</div>
-        <div><h4>Schnelle Reaktionszeit</h4><p>Wir antworten innerhalb von 24 Stunden auf Ihre Anfrage.</p></div>
-      </li>
-      <li>
-        <div class="check">✓</div>
-        <div><h4>Nur in Berlin</h4><p>Lokale Expertise und kurze Wege — wir kennen Berlin.</p></div>
-      </li>
-    </ul>
+
+  <!-- LEAVE REVIEW -->
+  <div class="review-form-wrap reveal">
+    <h3 data-de="Ihre Bewertung hinterlassen" data-en="Leave your review" data-ar="اترك تقييمك">Ihre Bewertung hinterlassen</h3>
+    <div class="star-picker" id="starPicker">
+      <span data-star="1">★</span><span data-star="2">★</span><span data-star="3">★</span><span data-star="4">★</span><span data-star="5">★</span>
+    </div>
+    <div class="review-inputs">
+      <input type="text" id="rName" placeholder="Ihr Name / Your name" autocomplete="name">
+      <input type="text" id="rService" placeholder="Leistung / Service">
+    </div>
+    <textarea class="review-textarea" id="rText" placeholder="Ihre Erfahrung... / Your experience..."></textarea>
+    <button class="btn-review-submit" onclick="submitReview()" data-de="Bewertung senden" data-en="Submit Review" data-ar="إرسال التقييم">Bewertung senden</button>
+    <p class="review-success" id="reviewSuccess" data-de="✓ Danke! Ihre Bewertung wurde gesendet." data-en="✓ Thank you! Your review was submitted." data-ar="✓ شكراً! تم إرسال تقييمك.">✓ Danke! Ihre Bewertung wurde gesendet.</p>
   </div>
 </section>
 
 <!-- BOOKING -->
-<section id="termin">
+<section id="termin" style="background:var(--bg);">
   <div class="booking-wrap reveal">
     <div class="booking-top">
-      <h2>Termin anfragen</h2>
-      <p>Füllen Sie das Formular aus — wir melden uns innerhalb von 24 Stunden.</p>
+      <h2 data-de="Termin anfragen" data-en="Request an Appointment" data-ar="طلب موعد">Termin anfragen</h2>
+      <p data-de="Füllen Sie das Formular aus — wir melden uns innerhalb von 24 Stunden." data-en="Fill in the form — we will get back to you within 24 hours." data-ar="املأ النموذج — سنتواصل معك في غضون 24 ساعة.">Füllen Sie das Formular aus — wir melden uns innerhalb von 24 Stunden.</p>
     </div>
     <div class="booking-body">
-
-      <!-- FORM -->
       <div id="bookingForm">
         <div class="form-row">
           <div class="form-group">
-            <label>Vorname *</label>
+            <label data-de="Vorname *" data-en="First name *" data-ar="الاسم الأول *">Vorname *</label>
             <input type="text" id="fname" placeholder="Max" autocomplete="given-name">
-            <span class="field-error" id="err-fname">Bitte Vornamen eingeben.</span>
+            <span class="field-error" id="err-fname" data-de="Bitte Vornamen eingeben." data-en="Please enter your first name." data-ar="يرجى إدخال اسمك الأول.">Bitte Vornamen eingeben.</span>
           </div>
           <div class="form-group">
-            <label>Nachname</label>
+            <label data-de="Nachname" data-en="Last name" data-ar="اسم العائلة">Nachname</label>
             <input type="text" id="lname" placeholder="Mustermann" autocomplete="family-name">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Telefon *</label>
-            <input type="tel" id="phone" placeholder="+49 30 ..." autocomplete="tel">
-            <span class="field-error" id="err-phone">Bitte Telefonnummer eingeben.</span>
+            <label data-de="Telefon *" data-en="Phone *" data-ar="الهاتف *">Telefon *</label>
+            <input type="tel" id="phone" placeholder="+49 176 ..." autocomplete="tel">
+            <span class="field-error" id="err-phone" data-de="Bitte Telefonnummer eingeben." data-en="Please enter your phone number." data-ar="يرجى إدخال رقم هاتفك.">Bitte Telefonnummer eingeben.</span>
           </div>
           <div class="form-group">
             <label>E-Mail</label>
             <input type="email" id="email" placeholder="max@beispiel.de" autocomplete="email">
-            <span class="field-error" id="err-email">Bitte gültige E-Mail eingeben.</span>
+            <span class="field-error" id="err-email" data-de="Bitte gültige E-Mail eingeben." data-en="Please enter a valid email." data-ar="يرجى إدخال بريد إلكتروني صحيح.">Bitte gültige E-Mail eingeben.</span>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group full">
-            <label>Gewünschte Leistung *</label>
+            <label data-de="Gewünschte Leistung *" data-en="Service required *" data-ar="الخدمة المطلوبة *">Gewünschte Leistung *</label>
             <select id="service">
-              <option value="">Bitte auswählen...</option>
-              <option>Objektbetreuung</option>
-              <option>Administrative Unterstützung</option>
-              <option>Terminkoordination & Besichtigungen</option>
-              <option>Wohnungsübergabe & -rückgabe</option>
-              <option>Reinigung</option>
-              <option>Umzugshilfe & Transport</option>
-              <option>Gartenarbeit & -pflege</option>
-              <option>Renovierung & Reparaturen</option>
-              <option>Mehrere Leistungen</option>
+              <option value="">Bitte auswählen / Please select</option>
+              <option>Objektbetreuung / Property Management</option>
+              <option>Terminkoordination / Appointments</option>
+              <option>Wohnungsübergabe / Apartment Handover</option>
+              <option>Reinigung / Cleaning</option>
+              <option>Umzugshilfe / Moving Help</option>
+              <option>Gartenarbeit / Garden Work</option>
+              <option>Möbelmontage / Furniture Assembly</option>
+              <option>Entrümpelung &amp; Entsorgung / Clearance</option>
+              <option>Renovierung / Renovation</option>
+              <option>Mehrere Leistungen / Multiple Services</option>
             </select>
-            <span class="field-error" id="err-service">Bitte eine Leistung auswählen.</span>
+            <span class="field-error" id="err-service" data-de="Bitte eine Leistung auswählen." data-en="Please select a service." data-ar="يرجى اختيار خدمة.">Bitte eine Leistung auswählen.</span>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group full">
-            <label>Ihre Nachricht (optional)</label>
+            <label data-de="Nachricht (optional)" data-en="Message (optional)" data-ar="رسالة (اختياري)">Nachricht (optional)</label>
             <textarea id="message" placeholder="Beschreiben Sie kurz Ihr Anliegen..."></textarea>
           </div>
         </div>
         <button class="form-submit" id="submitBtn" onclick="submitForm()">
-          <span class="btn-text">Anfrage absenden →</span>
+          <span class="btn-text" data-de="Anfrage absenden →" data-en="Submit Request →" data-ar="إرسال الطلب →">Anfrage absenden →</span>
           <span class="spinner"></span>
         </button>
-        <p class="form-note">Keine Weitergabe Ihrer Daten. Wir melden uns persönlich bei Ihnen.</p>
+        <p class="form-note" data-de="Keine Weitergabe Ihrer Daten. Wir melden uns persönlich." data-en="Your data is never shared. We will contact you personally." data-ar="لن تتم مشاركة بياناتك. سنتصل بك شخصياً.">Keine Weitergabe Ihrer Daten. Wir melden uns persönlich.</p>
       </div>
-
-      <!-- SUCCESS -->
       <div class="success-msg" id="successMsg">
         <div class="success-icon">✓</div>
-        <h3>Anfrage erhalten!</h3>
-        <p>Vielen Dank, <span id="successName"></span>.<br>Wir melden uns innerhalb von 24 Stunden telefonisch bei Ihnen.</p>
+        <h3 data-de="Anfrage erhalten!" data-en="Request received!" data-ar="تم استلام الطلب!">Anfrage erhalten!</h3>
+        <p>Vielen Dank, <strong id="successName"></strong>.<br><span data-de="Wir melden uns innerhalb von 24 Stunden." data-en="We will be in touch within 24 hours." data-ar="سنتواصل معك في غضون 24 ساعة.">Wir melden uns innerhalb von 24 Stunden.</span></p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- CONTACT BAR -->
-<section style="background:#111; padding: 3rem 4rem; border-top: 1px solid rgba(201,168,76,0.1);">
-  <div style="max-width:700px; margin:0 auto; text-align:center;">
-    <span class="section-tag" style="display:block; margin-bottom:0.5rem;">Kontakt</span>
-    <h2 class="section-title" style="margin-bottom:1rem;">Schreiben Sie uns</h2>
-    <p style="color:rgba(245,242,236,0.6); margin-bottom:1.5rem;">Für direkte Anfragen erreichen Sie uns per E-Mail:</p>
-    <a href="mailto:24.7umzug@gmail.com" style="
-      display:inline-block; font-family:'Playfair Display',serif;
-      font-size:1.3rem; color:var(--gold); text-decoration:none;
-      border-bottom:1px solid rgba(201,168,76,0.4); padding-bottom:0.3rem;
-      transition: color 0.2s;
-    ">24.7umzug@gmail.com</a>
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <div>
+    <h3 data-de="Direkt schreiben oder anrufen" data-en="Call or message directly" data-ar="اتصل أو راسلنا مباشرة">Direkt schreiben oder anrufen</h3>
+    <p data-de="📞 Erreichbar täglich 10:00 – 23:00 Uhr · An Feiertagen bitte WhatsApp bevorzugen" data-en="📞 Available daily 10:00 – 23:00 · On public holidays please prefer WhatsApp" data-ar="📞 متاح يومياً 10:00 – 23:00 · في أيام العطل يُفضّل واتساب">📞 Erreichbar täglich 10:00 – 23:00 Uhr · An Feiertagen bitte WhatsApp bevorzugen</p>
+    <p style="margin-top:.5rem" data-de="📍 Ganz Berlin · 🚛 Umzüge: gesamtes Europa" data-en="📍 All of Berlin · 🚛 Moving: all of Europe" data-ar="📍 برلين كاملاً · 🚛 الانتقال: أوروبا بأكملها">📍 Ganz Berlin · 🚛 Umzüge: gesamtes Europa</p>
   </div>
-</section>
+  <div class="contact-btns">
+    <a href="tel:+4917680529034" class="btn-call">📞 +49 176 80529034</a>
+    <a href="https://wa.me/4917680529034?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Leistungen." target="_blank" class="btn-wa">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="mailto:24.7umzug@gmail.com" class="btn-call">✉ 24.7umzug@gmail.com</a>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Rundum<span> Berlin</span></div>
-  <p>© 2025 Rundum Berlin · Mohammed Halloum</p>
+  <p>© 2026 Rundum Berlin · Mohammed Halloum</p>
   <div class="footer-links">
-    <a href="#" onclick="showPage('impressum'); return false;">Impressum</a>
-    <a href="#" onclick="showPage('datenschutz'); return false;">Datenschutz</a>
+    <a href="#" onclick="showPage('impressum');return false;">Impressum</a>
+    <a href="#" onclick="showPage('datenschutz');return false;">Datenschutz</a>
   </div>
 </footer>
 
 <!-- IMPRESSUM -->
-<div id="impressum" style="display:none; position:fixed; inset:0; background:rgba(14,14,14,0.97); z-index:999; overflow-y:auto; padding:4rem 2rem;">
-  <div style="max-width:700px; margin:0 auto;">
-    <button onclick="hidePage('impressum')" style="background:var(--gold);color:var(--black);border:none;padding:0.5rem 1.2rem;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;margin-bottom:2rem;">← Zurück</button>
-    <h1 style="font-family:'Playfair Display',serif; font-size:2rem; color:var(--gold); margin-bottom:2rem;">Impressum</h1>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">Angaben gemäß § 5 TMG</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.8); margin-bottom:1.5rem;">Mohammed Halloum<br>Steinsitzseestraße 1<br>12489 Berlin<br>Deutschland</p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">Kontakt</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.8); margin-bottom:1.5rem;">E-Mail: <a href="mailto:24.7umzug@gmail.com" style="color:var(--gold);">24.7umzug@gmail.com</a></p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">Verantwortlich für den Inhalt (§ 55 Abs. 2 RStV)</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.8); margin-bottom:1.5rem;">Mohammed Halloum<br>Steinsitzseestraße 1<br>12489 Berlin</p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">Haftungsausschluss</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:1.5rem;">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann keine Gewähr übernommen werden.</p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">Urheberrecht</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:1.5rem;">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.</p>
+<div id="impressum" class="legal-overlay">
+  <div class="legal-inner">
+    <button onclick="hidePage('impressum')" style="background:var(--gold);color:#0e0e0e;border:none;padding:.48rem 1.1rem;border-radius:3px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;margin-bottom:1.8rem;">← Zurück</button>
+    <h1>Impressum</h1>
+    <h3>Angaben gemäß § 5 TMG</h3>
+    <p>Mohammed Halloum<br>Steinsitzseestraße 1<br>12489 Berlin<br>Deutschland</p>
+    <h3>Kontakt</h3>
+    <p>Telefon: <a href="tel:+4917680529034" style="color:var(--gold);">+49 176 80529034</a><br>E-Mail: <a href="mailto:24.7umzug@gmail.com" style="color:var(--gold);">24.7umzug@gmail.com</a></p>
+    <h3>Verantwortlich für den Inhalt (§ 55 Abs. 2 RStV)</h3>
+    <p>Mohammed Halloum<br>Steinsitzseestraße 1, 12489 Berlin</p>
+    <h3>Haftungsausschluss</h3>
+    <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann keine Gewähr übernommen werden.</p>
+    <h3>Urheberrecht</h3>
+    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.</p>
   </div>
 </div>
 
 <!-- DATENSCHUTZ -->
-<div id="datenschutz" style="display:none; position:fixed; inset:0; background:rgba(14,14,14,0.97); z-index:999; overflow-y:auto; padding:4rem 2rem;">
-  <div style="max-width:700px; margin:0 auto;">
-    <button onclick="hidePage('datenschutz')" style="background:var(--gold);color:var(--black);border:none;padding:0.5rem 1.2rem;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;margin-bottom:2rem;">← Zurück</button>
-    <h1 style="font-family:'Playfair Display',serif; font-size:2rem; color:var(--gold); margin-bottom:2rem;">Datenschutzerklärung</h1>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">1. Verantwortlicher</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.8); margin-bottom:1.5rem;">Mohammed Halloum<br>Steinsitzseestraße 1, 12489 Berlin<br>E-Mail: <a href="mailto:24.7umzug@gmail.com" style="color:var(--gold);">24.7umzug@gmail.com</a></p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">2. Erhebung und Verarbeitung personenbezogener Daten</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:1.5rem;">Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen einer Kontaktaufnahme oder Terminanfrage freiwillig mitteilen. Diese Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben.</p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">3. Rechtsgrundlage</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:1.5rem;">Die Verarbeitung Ihrer Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO sowie Art. 6 Abs. 1 lit. f DSGVO.</p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">4. Speicherdauer</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:1.5rem;">Ihre Daten werden gelöscht, sobald der Zweck der Verarbeitung entfällt und keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">5. Ihre Rechte</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:1.5rem;">Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung. Wenden Sie sich dazu an: <a href="mailto:24.7umzug@gmail.com" style="color:var(--gold);">24.7umzug@gmail.com</a></p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">6. Hosting & Cookies</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:1.5rem;">Diese Website verwendet keine Cookies und keine Tracking-Tools. Es werden keine Daten an Drittanbieter übermittelt.</p>
-    <h3 style="color:var(--gold-light); margin-bottom:0.5rem;">7. Beschwerderecht</h3>
-    <p style="line-height:1.8; color:rgba(245,242,236,0.7); margin-bottom:2rem;">Berliner Beauftragte für Datenschutz und Informationsfreiheit<br>Friedrichstr. 219, 10969 Berlin<br><a href="https://www.datenschutz-berlin.de" target="_blank" style="color:var(--gold);">www.datenschutz-berlin.de</a></p>
+<div id="datenschutz" class="legal-overlay">
+  <div class="legal-inner">
+    <button onclick="hidePage('datenschutz')" style="background:var(--gold);color:#0e0e0e;border:none;padding:.48rem 1.1rem;border-radius:3px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;margin-bottom:1.8rem;">← Zurück</button>
+    <h1>Datenschutzerklärung</h1>
+    <h3>1. Verantwortlicher</h3>
+    <p>Mohammed Halloum<br>Steinsitzseestraße 1, 12489 Berlin<br>E-Mail: <a href="mailto:24.7umzug@gmail.com" style="color:var(--gold);">24.7umzug@gmail.com</a></p>
+    <h3>2. Erhebung und Verarbeitung personenbezogener Daten</h3>
+    <p>Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen einer Kontaktaufnahme oder Terminanfrage freiwillig mitteilen.</p>
+    <h3>3. Rechtsgrundlage</h3>
+    <p>Die Verarbeitung Ihrer Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO sowie Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <h3>4. Speicherdauer</h3>
+    <p>Ihre Daten werden gelöscht, sobald der Zweck der Verarbeitung entfällt und keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+    <h3>5. Ihre Rechte</h3>
+    <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung. Wenden Sie sich dazu an: <a href="mailto:24.7umzug@gmail.com" style="color:var(--gold);">24.7umzug@gmail.com</a></p>
+    <h3>6. Hosting &amp; Cookies</h3>
+    <p>Diese Website verwendet keine Cookies und keine Tracking-Tools.</p>
+    <h3>7. Beschwerderecht</h3>
+    <p>Berliner Beauftragte für Datenschutz und Informationsfreiheit<br>Friedrichstr. 219, 10969 Berlin<br><a href="https://www.datenschutz-berlin.de" target="_blank" style="color:var(--gold);">www.datenschutz-berlin.de</a></p>
   </div>
 </div>
 
 <script>
-  // ── Scroll reveal ──────────────────────────────────────
-  const observer = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.12 }
-  );
-  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+// ── THEME ──────────────────────────────────────────────────────────────────
+let theme = localStorage.getItem('rb_theme') || 'dark';
+applyTheme(theme);
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t==='light'?'light':'');
+  document.getElementById('themeIcon').textContent = t==='light'?'☀️':'🌙';
+  theme=t; localStorage.setItem('rb_theme',t);
+}
+function toggleTheme(){ applyTheme(theme==='dark'?'light':'dark'); }
 
-  // ── Legal pages ────────────────────────────────────────
-  function showPage(id) {
-    document.getElementById(id).style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    window.scrollTo(0, 0);
-  }
-  function hidePage(id) {
-    document.getElementById(id).style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  // ── Validation helpers ─────────────────────────────────
-  function setError(fieldId, errId, show) {
-    const field = document.getElementById(fieldId);
-    const err   = document.getElementById(errId);
-    if (show) {
-      field.classList.add('error');
-      err.classList.add('show');
-    } else {
-      field.classList.remove('error');
-      err.classList.remove('show');
+// ── LANGUAGE ───────────────────────────────────────────────────────────────
+const LANGS=['de','en','ar'];
+const LANG_LABELS={de:'DE',en:'EN',ar:'عر'};
+let lang = localStorage.getItem('rb_lang') || 'de';
+applyLang(lang);
+function applyLang(l){
+  lang=l;
+  localStorage.setItem('rb_lang',l);
+  document.getElementById('langBtn').textContent = LANG_LABELS[l];
+  document.documentElement.lang = l==='ar'?'ar':l==='en'?'en':'de';
+  document.documentElement.dir = l==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-'+l+']').forEach(el=>{
+    const v = el.getAttribute('data-'+l);
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){
+      el.placeholder=v;
+    } else if(el.tagName==='OPTION'){
+      el.textContent=v;
+    } else if(el.children.length===0){
+      // Only update elements with no child elements (pure text nodes)
+      el.innerHTML=v;
     }
-  }
-
-  // Clear error on input
-  ['fname','phone','email','service'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('input', () => {
-      el.classList.remove('error');
-      const err = document.getElementById('err-' + id);
-      if (err) err.classList.remove('show');
-    });
   });
+}
+function cycleLang(){
+  const i=LANGS.indexOf(lang);
+  applyLang(LANGS[(i+1)%LANGS.length]);
+}
 
-  function validate() {
-    let ok = true;
-    const fname   = document.getElementById('fname').value.trim();
-    const phone   = document.getElementById('phone').value.trim();
-    const email   = document.getElementById('email').value.trim();
-    const service = document.getElementById('service').value;
+// ── MOBILE NAV ─────────────────────────────────────────────────────────────
+function toggleMobileNav(){
+  document.getElementById('mobileNav').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function closeMobileNav(){
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
 
-    setError('fname',   'err-fname',   !fname);
-    if (!fname) ok = false;
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
+const obs = new IntersectionObserver(
+  e=>e.forEach(x=>{ if(x.isIntersecting) x.target.classList.add('visible'); }),
+  {threshold:0.1}
+);
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 
-    setError('phone',   'err-phone',   !phone);
-    if (!phone) ok = false;
+// ── STAR PICKER ────────────────────────────────────────────────────────────
+let stars=0;
+const starEls=document.querySelectorAll('#starPicker span');
+starEls.forEach(s=>{
+  s.addEventListener('click',()=>{
+    stars=parseInt(s.dataset.star);
+    starEls.forEach(ss=>ss.classList.toggle('active',parseInt(ss.dataset.star)<=stars));
+  });
+  s.addEventListener('mouseenter',()=>{
+    starEls.forEach(ss=>ss.style.opacity=parseInt(ss.dataset.star)<=parseInt(s.dataset.star)?'1':'.28');
+  });
+});
+document.getElementById('starPicker').addEventListener('mouseleave',()=>{
+  starEls.forEach(ss=>ss.style.opacity=parseInt(ss.dataset.star)<=stars?'1':'.28');
+});
 
-    // Email optional but validate format if filled
-    const emailBad = email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    setError('email', 'err-email', emailBad);
-    if (emailBad) ok = false;
+function submitReview(){
+  const name=document.getElementById('rName').value.trim();
+  const svc=document.getElementById('rService').value.trim();
+  const txt=document.getElementById('rText').value.trim();
+  if(!name||!txt||stars===0) return;
+  const card=document.createElement('div');
+  card.className='review-card';
+  card.innerHTML=`<div class="review-stars">${'★'.repeat(stars)+'☆'.repeat(5-stars)}</div><p class="review-text">"${txt}"</p><div class="review-author"><div class="review-avatar">${name[0].toUpperCase()}</div><div><div class="review-name">${name}</div><div class="review-service">${svc||'Rundum Berlin'}</div></div></div>`;
+  document.getElementById('reviewsGrid').appendChild(card);
+  document.getElementById('rName').value='';
+  document.getElementById('rService').value='';
+  document.getElementById('rText').value='';
+  stars=0; starEls.forEach(ss=>ss.classList.remove('active'));
+  const suc=document.getElementById('reviewSuccess');
+  suc.style.display='block';
+  setTimeout(()=>suc.style.display='none',4000);
+}
 
-    setError('service', 'err-service', !service);
-    if (!service) ok = false;
+// ── LEGAL ──────────────────────────────────────────────────────────────────
+function showPage(id){ document.getElementById(id).style.display='block'; document.body.style.overflow='hidden'; }
+function hidePage(id){ document.getElementById(id).style.display='none'; document.body.style.overflow=''; }
 
-    return ok;
+// ── FORM ───────────────────────────────────────────────────────────────────
+function setErr(fid,eid,show){
+  document.getElementById(fid).classList.toggle('error',show);
+  document.getElementById(eid).classList.toggle('show',show);
+}
+['fname','phone','email','service'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('input',()=>{
+    el.classList.remove('error');
+    const e=document.getElementById('err-'+id);
+    if(e) e.classList.remove('show');
+  });
+});
+function validate(){
+  let ok=true;
+  const fn=document.getElementById('fname').value.trim();
+  const ph=document.getElementById('phone').value.trim();
+  const em=document.getElementById('email').value.trim();
+  const sv=document.getElementById('service').value;
+  setErr('fname','err-fname',!fn); if(!fn) ok=false;
+  setErr('phone','err-phone',!ph); if(!ph) ok=false;
+  const eb=em&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+  setErr('email','err-email',eb); if(eb) ok=false;
+  setErr('service','err-service',!sv); if(!sv) ok=false;
+  return ok;
+}
+async function submitForm(){
+  if(!validate()) return;
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true; btn.classList.add('loading');
+  const data={
+    vorname:document.getElementById('fname').value.trim(),
+    nachname:document.getElementById('lname').value.trim(),
+    telefon:document.getElementById('phone').value.trim(),
+    email:document.getElementById('email').value.trim(),
+    leistung:document.getElementById('service').value,
+    nachricht:document.getElementById('message').value.trim()
+  };
+  try{
+    const r=await fetch('https://formspree.io/f/mzdoyabb',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+    if(r.ok){
+      document.getElementById('successName').textContent=data.vorname;
+      document.getElementById('bookingForm').style.display='none';
+      document.getElementById('successMsg').style.display='block';
+    } else throw new Error();
+  } catch {
+    btn.disabled=false; btn.classList.remove('loading');
+    const sub=encodeURIComponent('Neue Anfrage: '+data.leistung+' – '+data.vorname);
+    const body=encodeURIComponent('Name: '+data.vorname+' '+data.nachname+'\nTelefon: '+data.telefon+'\nE-Mail: '+(data.email||'—')+'\nLeistung: '+data.leistung+'\n\nNachricht:\n'+(data.nachricht||'—'));
+    window.location.href='mailto:24.7umzug@gmail.com?subject='+sub+'&body='+body;
   }
-
-  // ── Submit via Formspree ───────────────────────────────
-  async function submitForm() {
-    if (!validate()) return;
-
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.classList.add('loading');
-
-    const data = {
-      vorname:  document.getElementById('fname').value.trim(),
-      nachname: document.getElementById('lname').value.trim(),
-      telefon:  document.getElementById('phone').value.trim(),
-      email:    document.getElementById('email').value.trim(),
-      leistung: document.getElementById('service').value,
-      nachricht: document.getElementById('message').value.trim()
-    };
-
-    try {
-      const res = await fetch('https://formspree.io/f/mzdoyabb', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (res.ok) {
-        document.getElementById('successName').textContent = data.vorname;
-        document.getElementById('bookingForm').style.display = 'none';
-        document.getElementById('successMsg').style.display  = 'block';
-      } else {
-        throw new Error('Server error');
-      }
-    } catch {
-      btn.disabled = false;
-      btn.classList.remove('loading');
-      // Fallback to mailto if Formspree fails
-      const subject = encodeURIComponent('Neue Anfrage: ' + data.leistung + ' – ' + data.vorname);
-      const body = encodeURIComponent(
-        'Name: ' + data.vorname + ' ' + data.nachname + '\n' +
-        'Telefon: ' + data.telefon + '\n' +
-        'E-Mail: ' + (data.email || '—') + '\n' +
-        'Leistung: ' + data.leistung + '\n\nNachricht:\n' + (data.nachricht || '—')
-      );
-      window.location.href = 'mailto:24.7umzug@gmail.com?subject=' + subject + '&body=' + body;
-    }
-  }
+}
 </script>
 </body>
 </html>
